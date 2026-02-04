@@ -1,0 +1,5 @@
+{
+  "name": "DealOS",
+  "description": "A powerful multi-exit real estate deal analyzer. Upload CSVs, filter by Days on Market (DOM), and analyze for Assignment, Seller Finance, and Subject-To exit strategies.",
+  "requestFramePermissions": []
+}
