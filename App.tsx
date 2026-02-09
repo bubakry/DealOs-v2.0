@@ -6,6 +6,7 @@ import { DealDrawer } from './components/DealDrawer';
 import { UploadModal } from './components/UploadModal';
 import { BoardView } from './components/BoardView';
 import { UniversalAnalyzer } from './components/UniversalAnalyzer';
+import { QuickAnalysisCalculator } from './components/QuickAnalysisCalculator';
 import { DealFormModal } from './components/DealFormModal';
 import { 
   Download, Search, Flame, BarChart3, Plus, Star, 
@@ -116,7 +117,7 @@ export default function App() {
   const [dealFormMode, setDealFormMode] = useState<'add' | 'edit'>('add');
   const [editingDeal, setEditingDeal] = useState<Deal | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list' | 'board'>('grid');
-  const [mainTab, setMainTab] = useState<'inventory' | 'analyzer' | 'calculator'>('inventory');
+  const [mainTab, setMainTab] = useState<'inventory' | 'analyzer' | 'quick'>('inventory');
   const [search, setSearch] = useState('');
   const [activeMetricFilter, setActiveMetricFilter] = useState<MetricFilter>('none');
   
@@ -274,10 +275,10 @@ export default function App() {
                 <Calculator size={16} /> Analyzer
               </button>
               <button 
-                onClick={() => setMainTab('calculator')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${mainTab === 'calculator' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
+                onClick={() => setMainTab('quick')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${mainTab === 'quick' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
               >
-                <FileText size={16} /> Offer Sheet
+                <FileText size={16} /> Quick Analysis
               </button>
             </div>
 
@@ -514,35 +515,8 @@ export default function App() {
             <UniversalAnalyzer onSaveToInventory={handleSaveAnalyzerDeal} />
           </div>
         ) : (
-          <div className="bg-white rounded-3xl border border-slate-200/60 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-6 duration-500">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-2xl bg-brand-50 border border-brand-100 text-brand-600">
-                <FileText size={20} />
-              </div>
-              <div>
-                <h2 className="text-2xl font-extrabold text-slate-900">1‑Page Offer Calculator</h2>
-                <p className="text-sm text-slate-500">Download the spreadsheet to run quick offer calculations.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <div className="text-xs font-black uppercase tracking-widest text-slate-400">Spreadsheet</div>
-                <div className="text-lg font-bold text-slate-900">1page_offer_calculator.xlsx</div>
-                <div className="text-xs text-slate-500">Included in the app at `/public/1page_offer_calculator.xlsx`.</div>
-              </div>
-              <a
-                href="/1page_offer_calculator.xlsx"
-                download
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 text-white text-xs font-black uppercase tracking-widest shadow-sm hover:bg-slate-800 transition-all"
-              >
-                <Download size={16} /> Download
-              </a>
-            </div>
-
-            <div className="mt-6 text-sm text-slate-600 leading-relaxed">
-              If you want this embedded directly in the app, we can convert it to a web form or render it with a spreadsheet viewer.
-            </div>
+          <div className="animate-in fade-in slide-in-from-bottom-6 duration-500">
+            <QuickAnalysisCalculator />
           </div>
         )}
       </main>
